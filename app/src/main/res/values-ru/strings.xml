@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FoodOrder</string>
+    <string name="product_name">Product name</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_remove">Remove</string>
+    <string name="message_send">Message sent</string>
+    <string name="message_send_error">Message sent failed</string>
+</resources>
