@@ -1,5 +1,7 @@
 package com.example.foodorder.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.foodorder.dto.Product
@@ -12,8 +14,8 @@ private val empty = Product(
     name = "",
 )
 
-class ProductViewModel : ViewModel() {
-    private val repository: ProductRepository = ProductRepositoryImpl()
+class ProductViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository: ProductRepository = ProductRepositoryImpl(application)
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
 
