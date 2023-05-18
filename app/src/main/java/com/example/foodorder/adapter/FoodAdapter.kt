@@ -13,6 +13,7 @@ import com.example.foodorder.dto.Product
 interface OnInteractionListener {
     fun onEdit(product: Product) {}
     fun onRemove(product: Product) {}
+    fun onSelect(product: Product) {}
 }
 
 class FoodAdapter(
@@ -37,6 +38,9 @@ class ProductViewHolder(
     fun bind(product: Product) {
         binding.apply {
             name.text = product.name
+            name.setOnClickListener{
+                onInteractionListener.onSelect(product)
+            }
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {

@@ -6,4 +6,8 @@
     <string name="message_send">Message sent</string>
     <string name="message_send_error">Message sent failed</string>
     <string name="description_product_save">Save</string>
+    <string name="phone_text">Phone number</string>
+    <string name="change_phone">Change phone</string>
+    <string name="change_phone_ok">OK</string>
+    <string name="change_phone_cancel">Cancel</string>
 </resources>

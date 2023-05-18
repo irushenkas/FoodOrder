@@ -3,11 +3,9 @@ package com.example.foodorder.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.foodorder.dto.Product
 import com.example.foodorder.repository.ProductRepository
 import com.example.foodorder.repository.ProductRepositoryImpl
-
 
 private val empty = Product(
     id = 0,
@@ -17,7 +15,8 @@ private val empty = Product(
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: ProductRepository = ProductRepositoryImpl(application)
     val data = repository.getAll()
-    val edited = MutableLiveData(empty)
+    private val edited = MutableLiveData(empty)
+    private var selectedData: MutableSet<String> = HashSet()
 
     fun save() {
         edited.value?.let {
@@ -39,4 +38,16 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun removeById(id: Long) = repository.removeById(id)
+
+    fun select(product: Product) {
+        if(selectedData.contains(product.name)) {
+            selectedData.remove(product.name)
+        } else {
+            selectedData.add(product.name)
+        }
+    }
+
+    fun getSelected(): MutableSet<String> {
+        return selectedData
+    }
 }
