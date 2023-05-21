@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">Food order</string>
-    <string name="product_name">Product name</string>
-    <string name="menu_edit">Edit</string>
-    <string name="menu_remove">Remove</string>
-    <string name="message_send">Message sent</string>
-    <string name="message_send_error">Message sent failed</string>
-    <string name="description_product_save">Save</string>
-    <string name="phone_text">Phone number</string>
-    <string name="change_phone">Change phone</string>
-    <string name="dialog_ok">OK</string>
-    <string name="dialog_cancel">Cancel</string>
-    <string name="comment_text">Comment</string>
+    <string name="app_name">Заказ продуктов</string>
+    <string name="product_name">Продукт</string>
+    <string name="menu_edit">Редактировать</string>
+    <string name="menu_remove">Удалить</string>
+    <string name="message_send">Сообщение отправлено</string>
+    <string name="message_send_error">Ошибка при отправке сообщения</string>
+    <string name="description_product_save">Сохранить</string>
+    <string name="phone_text">Номер телефона</string>
+    <string name="change_phone">Изменить номер</string>
+    <string name="dialog_ok">Сохранить</string>
+    <string name="dialog_cancel">Отмена</string>
+    <string name="comment_text">Комментарий</string>
 </resources>
