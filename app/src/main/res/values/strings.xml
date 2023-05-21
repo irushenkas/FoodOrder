@@ -8,6 +8,7 @@
     <string name="description_product_save">Save</string>
     <string name="phone_text">Phone number</string>
     <string name="change_phone">Change phone</string>
-    <string name="change_phone_ok">OK</string>
-    <string name="change_phone_cancel">Cancel</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="comment_text">Comment</string>
 </resources>

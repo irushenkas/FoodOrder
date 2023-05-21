@@ -10,13 +10,14 @@ import com.example.foodorder.repository.ProductRepositoryImpl
 private val empty = Product(
     id = 0,
     name = "",
+    comment = null,
+    isSelected = false,
 )
 
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: ProductRepository = ProductRepositoryImpl(application)
     val data = repository.getAll()
     private val edited = MutableLiveData(empty)
-    private var selectedData: MutableSet<String> = HashSet()
 
     fun save() {
         edited.value?.let {
@@ -40,14 +41,23 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     fun removeById(id: Long) = repository.removeById(id)
 
     fun select(product: Product) {
-        if(selectedData.contains(product.name)) {
-            selectedData.remove(product.name)
-        } else {
-            selectedData.add(product.name)
-        }
+        val isSelected = product.isSelected
+        edit(product)
+        edited.value = edited.value?.copy(isSelected = !isSelected)
+        save()
     }
 
-    fun getSelected(): MutableSet<String> {
-        return selectedData
+    fun getSelected(): List<Product> {
+        return data.value?.filter { it.isSelected }?: emptyList()
+    }
+
+    fun changeComment(product: Product, comment: String?) {
+        edit(product)
+        edited.value = edited.value?.copy(comment = comment)
+        save()
+    }
+
+    fun cleanTemporaryData() {
+        repository.cleanTemporaryData()
     }
 }

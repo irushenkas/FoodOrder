@@ -7,4 +7,5 @@ interface ProductRepository {
     fun getAll(): LiveData<List<Product>>
     fun save(product: Product)
     fun removeById(id: Long)
+    fun cleanTemporaryData()
 }

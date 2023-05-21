@@ -5,19 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <CheckBox
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <CheckBox
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
 
-    <ImageButton
-        android:id="@+id/menu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/common_spacing"
-        app:srcCompat="@drawable/ic_menu_24dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent" />
+        <ImageButton
+            android:id="@+id/comment"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/menu"
+            android:layout_margin="@dimen/common_spacing"
+            app:srcCompat="@drawable/ic_comment_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent" />
+
+        <ImageButton
+            android:id="@+id/menu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="@dimen/common_spacing"
+            app:srcCompat="@drawable/ic_menu_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

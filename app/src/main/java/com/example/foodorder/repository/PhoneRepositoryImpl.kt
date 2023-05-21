@@ -31,8 +31,8 @@ class PhoneRepositoryImpl(private val context: Context,
     override fun get(): LiveData<String?> = data
 
     override fun save(phone: String) {
-            data.value = phone
-            sync()
+        data.value = phone
+        sync()
     }
 
     private fun sync() {

@@ -45,13 +45,22 @@ class ProductRepositoryImpl(private val context: Context,
         }
 
         products = products.map {
-            if (it.id != product.id) it else it.copy(name = product.name)
+            if (it.id != product.id) it else it.copy(name = product.name, comment = product.comment, isSelected = product.isSelected)
         }
         data.value = products
+        sync()
     }
 
     override fun removeById(id: Long) {
         products = products.filter { it.id != id }
+        data.value = products
+        sync()
+    }
+
+    override fun cleanTemporaryData() {
+        products = products.map {
+            it.copy(comment = null, isSelected = false)
+        }
         data.value = products
         sync()
     }

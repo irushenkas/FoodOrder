@@ -52,10 +52,14 @@ class ProductFragment : Fragment() {
             override fun onSelect(product: Product) {
                 productViewModel.select(product)
             }
-        })
+
+            override fun onChangeComment(product: Product, comment: String?) {
+                productViewModel.changeComment(product, comment)
+            }
+        }, context)
         binding.list.adapter = adapter
-        productViewModel.data.observe(viewLifecycleOwner) { posts ->
-            adapter.submitList(posts)
+        productViewModel.data.observe(viewLifecycleOwner) { products ->
+            adapter.submitList(products)
         }
 
         binding.add.setOnClickListener {
@@ -65,7 +69,15 @@ class ProductFragment : Fragment() {
         binding.send.setOnClickListener {
             val phoneNumber: String = phoneViewModel.get()?: ""
 
-            val selected = productViewModel.getSelected().joinToString(separator = ",")
+            val selected = productViewModel.getSelected().map {
+                if(it.comment != null) {
+                    String.format("%s(%s)", it.name, it.comment)
+                } else {
+                    it.name
+                }
+            }.joinToString(separator = ", ")
+
+            productViewModel.cleanTemporaryData()
 
             val sendIntent = Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", phoneNumber, null))
             sendIntent.putExtra("sms_body", selected)

@@ -28,12 +28,12 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
             input.setText(viewModel.data.value?:"")
             builder.setView(input)
 
-            builder.setPositiveButton(resources.getString(R.string.change_phone_ok)) { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.dialog_ok)) { _, _ ->
                 viewModel.edit(input.text.toString())
                 viewModel.save()
                 findViewById<ActionMenuItemView>(R.id.phoneText).text = viewModel.data.value
             }
-            builder.setNegativeButton(resources.getString(R.string.change_phone_cancel)) { dialog, _ ->
+            builder.setNegativeButton(resources.getString(R.string.dialog_cancel)) { dialog, _ ->
                 dialog.cancel()
             }
 
