@@ -6,4 +6,5 @@ data class Product(
     val name: String,
     var comment: String?,
     var isSelected: Boolean = false,
+    var priority: Int = 0,
 )

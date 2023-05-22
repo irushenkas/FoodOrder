@@ -30,12 +30,9 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         edited.value = product
     }
 
-    fun changeContent(content: String) {
+    fun changeContent(content: String, priority: Int) {
         val text = content.trim()
-        if (edited.value?.name == text) {
-            return
-        }
-        edited.value = edited.value?.copy(name = text)
+        edited.value = edited.value?.copy(name = text, priority = priority)
     }
 
     fun removeById(id: Long) = repository.removeById(id)
@@ -59,5 +56,9 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
 
     fun cleanTemporaryData() {
         repository.cleanTemporaryData()
+    }
+
+    fun increasePriority(selected: List<Product>) {
+        repository.increasePriority(selected)
     }
 }

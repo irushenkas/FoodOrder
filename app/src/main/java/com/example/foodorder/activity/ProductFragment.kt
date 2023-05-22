@@ -12,10 +12,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.foodorder.R
 import com.example.foodorder.adapter.FoodAdapter
 import com.example.foodorder.adapter.OnInteractionListener
+import com.example.foodorder.comparator.PriorityComparator
 import com.example.foodorder.databinding.FragmentProductBinding
 import com.example.foodorder.dto.Product
 import com.example.foodorder.viewmodel.PhoneViewModel
 import com.example.foodorder.viewmodel.ProductViewModel
+import java.util.*
 
 class ProductFragment : Fragment() {
 
@@ -41,7 +43,8 @@ class ProductFragment : Fragment() {
             override fun onEdit(product: Product) {
                 productViewModel.edit(product)
                 val bundle = Bundle()
-                bundle.putString("textArg", product.name)
+                bundle.putString("name", product.name)
+                bundle.putInt("priority", product.priority)
                 findNavController().navigate(R.id.action_productFragment_to_editProductFragment, bundle)
             }
 
@@ -57,8 +60,12 @@ class ProductFragment : Fragment() {
                 productViewModel.changeComment(product, comment)
             }
         }, context)
+
         binding.list.adapter = adapter
         productViewModel.data.observe(viewLifecycleOwner) { products ->
+            val priorityComparator = PriorityComparator()
+            Collections.sort(products, priorityComparator)
+
             adapter.submitList(products)
         }
 
@@ -69,18 +76,21 @@ class ProductFragment : Fragment() {
         binding.send.setOnClickListener {
             val phoneNumber: String = phoneViewModel.get()?: ""
 
-            val selected = productViewModel.getSelected().map {
-                if(it.comment != null) {
+            val selected = productViewModel.getSelected()
+            productViewModel.increasePriority(selected)
+
+            val selectedStr = selected.joinToString(separator = ", ") {
+                if (it.comment != null) {
                     String.format("%s(%s)", it.name, it.comment)
                 } else {
                     it.name
                 }
-            }.joinToString(separator = ", ")
+            }
 
             productViewModel.cleanTemporaryData()
 
             val sendIntent = Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", phoneNumber, null))
-            sendIntent.putExtra("sms_body", selected)
+            sendIntent.putExtra("sms_body", selectedStr)
             startActivity(sendIntent)
         }
 

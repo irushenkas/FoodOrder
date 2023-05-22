@@ -29,7 +29,7 @@ class NewProductFragment : Fragment() {
         )
 
         binding.ok.setOnClickListener {
-            viewModel.changeContent(binding.edit.text.toString())
+            viewModel.changeContent(binding.edit.text.toString(), 0)
             viewModel.save()
             AndroidUtils.hideKeyboard(requireView())
             findNavController().navigateUp()

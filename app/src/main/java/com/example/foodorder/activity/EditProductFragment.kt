@@ -9,13 +9,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.foodorder.databinding.FragmentEditProductBinding
 import com.example.foodorder.util.AndroidUtils
+import com.example.foodorder.util.IntArg
 import com.example.foodorder.util.StringArg
 import com.example.foodorder.viewmodel.ProductViewModel
 
 class EditProductFragment : Fragment() {
 
     companion object {
-        var Bundle.textArg: String? by StringArg
+        var Bundle.name: String? by StringArg
+        var Bundle.priority: Int? by IntArg
     }
 
     private val viewModel: ProductViewModel by viewModels(
@@ -33,11 +35,16 @@ class EditProductFragment : Fragment() {
             false
         )
 
-        arguments?.textArg
-            ?.let(binding.edit::setText)
+        arguments?.name?.let(binding.edit::setText)
+        val priority = arguments?.priority?.toString()
+        priority.let(binding.priority::setText)
 
         binding.ok.setOnClickListener {
-            viewModel.changeContent(binding.edit.text.toString())
+            var priority = 0
+            if(binding.priority.text.toString().isNotEmpty()) {
+                priority = Integer.parseInt(binding.priority.text.toString())
+            }
+            viewModel.changeContent(binding.edit.text.toString(), priority)
             viewModel.save()
             AndroidUtils.hideKeyboard(requireView())
             findNavController().navigateUp()

@@ -45,7 +45,8 @@ class ProductRepositoryImpl(private val context: Context,
         }
 
         products = products.map {
-            if (it.id != product.id) it else it.copy(name = product.name, comment = product.comment, isSelected = product.isSelected)
+            if (it.id != product.id) it else it.copy(name = product.name, comment = product.comment,
+                isSelected = product.isSelected, priority = product.priority)
         }
         data.value = products
         sync()
@@ -60,6 +61,14 @@ class ProductRepositoryImpl(private val context: Context,
     override fun cleanTemporaryData() {
         products = products.map {
             it.copy(comment = null, isSelected = false)
+        }
+        data.value = products
+        sync()
+    }
+
+    override fun increasePriority(selected: List<Product>) {
+        products = products.map { p ->
+            if (selected.map { it.id }.contains(p.id)) p.copy(priority = p.priority + 1) else p
         }
         data.value = products
         sync()

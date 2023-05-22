@@ -8,4 +8,5 @@ interface ProductRepository {
     fun save(product: Product)
     fun removeById(id: Long)
     fun cleanTemporaryData()
+    fun increasePriority(selected: List<Product>)
 }

@@ -6,13 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".activity.EditProductFragment">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edit"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="start|top"
-        android:inputType="textMultiLine">
-    </com.google.android.material.textfield.TextInputEditText>
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/productBlock"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text">
+            </com.google.android.material.textfield.TextInputEditText>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/priority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/edit"
+                android:inputType="text">
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
